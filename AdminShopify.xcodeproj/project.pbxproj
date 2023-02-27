@@ -26,6 +26,13 @@
 		278C5BDB29AAADC50041D4EB /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */; };
 		278C5BDC29AAADC50041D4EB /* ProductsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278C5BDA29AAADC50041D4EB /* ProductsCollectionViewCell.xib */; };
 		278C5BDF29AABADC0041D4EB /* UIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BDE29AABADC0041D4EB /* UIFunctions.swift */; };
+		27C3BB9629AC23F400486455 /* NetworkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9529AC23F400486455 /* NetworkingViewModel.swift */; };
+		27C3BB9829AC24B000486455 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9729AC24B000486455 /* NetworkServices.swift */; };
+		27C3BB9C29AC377900486455 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9B29AC377900486455 /* EndPoint.swift */; };
+		27C3BBAA29AC891C00486455 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBA929AC891C00486455 /* LoginViewController.swift */; };
+		27C3BBAC29AC892C00486455 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBAB29AC892C00486455 /* SignUpViewController.swift */; };
+		27C3BBB029AC8DFF00486455 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */; };
+		27C3BBB229AC90A600486455 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBB129AC90A600486455 /* TabBarController.swift */; };
 		6E3691B9A5255BEC719A4C21 /* Pods_AdminShopify_AdminShopifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */; };
 		BEE0D6BB084D3BFB2DAA5143 /* Pods_AdminShopifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1AE2FC625620F29798FBAE /* Pods_AdminShopifyTests.framework */; };
 		D501A5914E94EB35B3E4E558 /* Pods_AdminShopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201A88B873DE83F23B14140A /* Pods_AdminShopify.framework */; };
@@ -75,6 +82,13 @@
 		278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		278C5BDA29AAADC50041D4EB /* ProductsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsCollectionViewCell.xib; sourceTree = "<group>"; };
 		278C5BDE29AABADC0041D4EB /* UIFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFunctions.swift; sourceTree = "<group>"; };
+		27C3BB9529AC23F400486455 /* NetworkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingViewModel.swift; sourceTree = "<group>"; };
+		27C3BB9729AC24B000486455 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		27C3BB9B29AC377900486455 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		27C3BBA929AC891C00486455 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		27C3BBAB29AC892C00486455 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		27C3BBB129AC90A600486455 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdminShopify_AdminShopifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DA7033883DEDB11AB0AE2E5 /* Pods-AdminShopify-AdminShopifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdminShopify-AdminShopifyUITests.release.xcconfig"; path = "Target Support Files/Pods-AdminShopify-AdminShopifyUITests/Pods-AdminShopify-AdminShopifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		80778EDA008A6893D848028D /* Pods-AdminShopify-AdminShopifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdminShopify-AdminShopifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-AdminShopify-AdminShopifyUITests/Pods-AdminShopify-AdminShopifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +189,7 @@
 		271DA15229A979D9008EF0B0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				27C3BB9529AC23F400486455 /* NetworkingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -194,6 +209,7 @@
 		271DA15429A979E8008EF0B0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				27C3BB9A29AC376800486455 /* Networking */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,11 +228,15 @@
 		271DA15629A97A2C008EF0B0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				27C3BBA929AC891C00486455 /* LoginViewController.swift */,
+				27C3BBAB29AC892C00486455 /* SignUpViewController.swift */,
 				271DA15729A97A89008EF0B0 /* ProductsViewController.swift */,
 				271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */,
 				271DA15929A97A98008EF0B0 /* CouponsViewController.swift */,
 				271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */,
 				271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */,
+				27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */,
+				27C3BBB129AC90A600486455 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -254,6 +274,15 @@
 				278C5BDE29AABADC0041D4EB /* UIFunctions.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		27C3BB9A29AC376800486455 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				27C3BB9729AC24B000486455 /* NetworkServices.swift */,
+				27C3BB9B29AC377900486455 /* EndPoint.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		3DA99DCF2FE7E7F31A0B7F51 /* Pods */ = {
@@ -510,17 +539,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C3BB9629AC23F400486455 /* NetworkingViewModel.swift in Sources */,
+				27C3BB9829AC24B000486455 /* NetworkServices.swift in Sources */,
 				271DA15E29A97ACD008EF0B0 /* ProductCRUDViewController.swift in Sources */,
+				27C3BBB229AC90A600486455 /* TabBarController.swift in Sources */,
+				27C3BBAA29AC891C00486455 /* LoginViewController.swift in Sources */,
 				271DA12A29A975F6008EF0B0 /* AdminShopify.xcdatamodeld in Sources */,
 				271DA15A29A97A98008EF0B0 /* CouponsViewController.swift in Sources */,
 				271DA12029A975F6008EF0B0 /* AppDelegate.swift in Sources */,
 				271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */,
 				271DA12229A975F6008EF0B0 /* SceneDelegate.swift in Sources */,
 				271DA15829A97A89008EF0B0 /* ProductsViewController.swift in Sources */,
+				27C3BBAC29AC892C00486455 /* SignUpViewController.swift in Sources */,
 				278C5BD629AAA0E10041D4EB /* CouponsCollectionViewCell.swift in Sources */,
+				27C3BB9C29AC377900486455 /* EndPoint.swift in Sources */,
 				278C5BDF29AABADC0041D4EB /* UIFunctions.swift in Sources */,
 				278C5BDB29AAADC50041D4EB /* ProductsCollectionViewCell.swift in Sources */,
 				271DA15C29A97AA8008EF0B0 /* StoreViewController.swift in Sources */,
+				27C3BBB029AC8DFF00486455 /* InformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

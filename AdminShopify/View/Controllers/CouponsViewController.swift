@@ -68,7 +68,7 @@ extension CouponsViewController : UICollectionViewDelegate {
 
 extension CouponsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/5)-10)
+        return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/6)-10)
     }
 }
  
