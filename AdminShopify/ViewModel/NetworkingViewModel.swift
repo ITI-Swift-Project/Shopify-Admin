@@ -10,11 +10,13 @@ import Foundation
 
 class NetworkingViewModel {
     
+    //MARK: - Fetching Products
     var bindingProductsResult : (()->()) = {}
     var bindingMenProductsResult : (()->()) = {}
     var bindingWomenProductsResult : (()->()) = {}
     var bindingKidsProductsResult : (()->()) = {}
     var bindingSaleProductsResult : (()->()) = {}
+    
     
     var allProductsResult : Products!{
         didSet{
@@ -47,6 +49,8 @@ class NetworkingViewModel {
     }
     
     
+    
+    
     func getAllProducts(url : String){
         NetworkServices.fetch(url: url) { result in
             self.allProductsResult = result
@@ -76,5 +80,22 @@ class NetworkingViewModel {
             self.saleProductsResult = result
         }
     }
+    
+    //MARK: - Fetching Coupons
+    var bindingCouponsResult : (()->()) = {}
+
+    var couponsResult : Discounts!{
+        didSet{
+            bindingCouponsResult()
+        }
+    }
+    
+    func getCoupons(url : String){
+        NetworkServices.fetch(url: url) { result in
+            self.couponsResult = result
+        }
+    }
+    
+    
 }
 

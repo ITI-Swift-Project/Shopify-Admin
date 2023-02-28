@@ -7,18 +7,25 @@
 
 import Foundation
 
-struct image : Decodable {
+struct image : Codable {
     var src : String
 }
 
-struct Product : Decodable {
+struct variants : Codable{
+    var price : String
+    var inventory_quantity : Int
+}
+
+
+struct Product : Codable {
     var id : Int
     var title : String
     var vendor : String
     var body_html : String
     var image : image
+    var variants : [variants]
 }
 
-class Products : Decodable {
+class Products : Codable {
     var products : [Product]?
 }
