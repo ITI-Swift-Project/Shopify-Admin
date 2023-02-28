@@ -10,22 +10,30 @@ import UIKit
 class ProductCRUDViewController: UIViewController {
 
     @IBOutlet weak var productTitleTextField: UITextField!
-    @IBOutlet weak var productDescriptionTextField: UITextField!
+    @IBOutlet weak var productVendorTextField: UITextField!
     @IBOutlet weak var productPriceTextField: UITextField!
+    @IBOutlet weak var actionButtonOutlet: UIButton!
+    @IBOutlet weak var inventoryTextField: UITextField!
+    @IBOutlet weak var productImageUrlTextField: UITextField!
+    
+    var product : Product?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        productTitleTextField.text = product?.title ?? ""
+        productVendorTextField.text = product?.vendor ?? ""
+        productPriceTextField.text = product?.variants[0].price ?? "0"
+        inventoryTextField.text = String(product?.variants[0].inventory_quantity ?? 0)
+        productImageUrlTextField.text = product?.image.src ?? ""
 
-        // Do any additional setup after loading the view.
     }
     
-    @IBAction func imageUploderButton(_ sender: UIButton) {
+    
+    @IBAction func actionButton(_ sender: UIButton) {
         
     }
     
-    @IBAction func imageTakerButton(_ sender: Any) {
-        
-    }
     
     
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 class ProductsViewController: UIViewController {
@@ -31,6 +32,8 @@ class ProductsViewController: UIViewController {
                 self.productsCollectionView.reloadData()
             }
         }
+        
+        productsSearchBar.delegate = self
         
         productsSearchBar.layer.cornerRadius = 12
         productsSearchBar.layer.masksToBounds = true
@@ -117,16 +120,6 @@ class ProductsViewController: UIViewController {
         tabBarController?.tabBar.layer.cornerRadius = UIScreen.main.bounds.width / 20
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //MARK:  Collection View Protocols
@@ -139,9 +132,16 @@ extension ProductsViewController : UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductsCollectionViewCell", for: indexPath) as! ProductsCollectionViewCell
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
+        
         cell.productNameLabel.text = displayArray?[indexPath.row].title
-        cell.productImageView.image = UIImage(systemName: "camera.circle.fill")
-    
+//        cell.productNameLabel.adjustsFontSizeToFitWidth = true
+        cell.productImageView.kf.indicatorType = .activity
+        cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
+        cell.productVendorLabel.text = displayArray?[indexPath.row].vendor
+        cell.productPriceLabel.text = "\((displayArray?[indexPath.row].variants[0].price) ?? "")$"
+        cell.productPriceLabel.adjustsFontSizeToFitWidth = true
+     
+        
         return cell
     }
     
@@ -151,6 +151,8 @@ extension ProductsViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let PVC = storyboard?.instantiateViewController(withIdentifier: "productCRUD") as! ProductCRUDViewController
+       // PVC.actionButtonOutlet.setTitle("Update", for: .normal)
+        PVC.product = displayArray?[indexPath.row]
         self.present(PVC, animated:true, completion:nil)
     }
     
@@ -161,4 +163,22 @@ extension ProductsViewController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/5)-10)
     }
     
+}
+
+//MARK: - Product Search Bar
+extension ProductsViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        displayArray = []
+        
+        if searchText == "" {
+            displayArray = productsArray?.products
+        }
+        for product in  (productsArray?.products)! {
+            if product.title.uppercased().contains(searchText.uppercased()){
+                displayArray?.append(product)
+            }
+        }
+        self.productsCollectionView.reloadData()
+    }
 }

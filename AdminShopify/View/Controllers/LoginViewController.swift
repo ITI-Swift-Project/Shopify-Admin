@@ -20,17 +20,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButton(_ sender: UIButton) {
         let TBVC = storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-        self.navigationController?.pushViewController(TBVC, animated: true)
+        //"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"
+        if passwordTextField.text == "0000" {
+            self.navigationController?.pushViewController(TBVC, animated: true)
+        }else{
+            let alert : UIAlertController = UIAlertController(title: "Invalid", message: "Please Enter The Password Again", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "OK!", style: .cancel, handler: nil))
+            self.present(alert, animated: true , completion: nil)
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
