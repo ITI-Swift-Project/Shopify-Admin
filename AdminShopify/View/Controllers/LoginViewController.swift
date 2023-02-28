@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var emailTextField: UITextField!
+
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
@@ -22,11 +22,7 @@ class LoginViewController: UIViewController {
         let TBVC = storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
         self.navigationController?.pushViewController(TBVC, animated: true)
     }
-    
-    @IBAction func signUpButton(_ sender: UIButton) {
-        let SUVC = storyboard?.instantiateViewController(withIdentifier: "signUp") as! SignUpViewController
-        self.navigationController?.pushViewController(SUVC, animated: true)
-    }
+
     /*
     // MARK: - Navigation
 

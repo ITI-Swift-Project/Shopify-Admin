@@ -21,6 +21,7 @@
 		271DA15C29A97AA8008EF0B0 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */; };
 		271DA15E29A97ACD008EF0B0 /* ProductCRUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */; };
 		271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */; };
+		275791C129AD7FE7003F58B4 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C029AD7FE7003F58B4 /* Products.swift */; };
 		278C5BD629AAA0E10041D4EB /* CouponsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BD429AAA0E10041D4EB /* CouponsCollectionViewCell.swift */; };
 		278C5BD729AAA0E10041D4EB /* CouponsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278C5BD529AAA0E10041D4EB /* CouponsCollectionViewCell.xib */; };
 		278C5BDB29AAADC50041D4EB /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */; };
@@ -30,7 +31,6 @@
 		27C3BB9829AC24B000486455 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9729AC24B000486455 /* NetworkServices.swift */; };
 		27C3BB9C29AC377900486455 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9B29AC377900486455 /* EndPoint.swift */; };
 		27C3BBAA29AC891C00486455 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBA929AC891C00486455 /* LoginViewController.swift */; };
-		27C3BBAC29AC892C00486455 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBAB29AC892C00486455 /* SignUpViewController.swift */; };
 		27C3BBB029AC8DFF00486455 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */; };
 		27C3BBB229AC90A600486455 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBB129AC90A600486455 /* TabBarController.swift */; };
 		6E3691B9A5255BEC719A4C21 /* Pods_AdminShopify_AdminShopifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */; };
@@ -77,6 +77,7 @@
 		271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCRUDViewController.swift; sourceTree = "<group>"; };
 		271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCRUDViewController.swift; sourceTree = "<group>"; };
+		275791C029AD7FE7003F58B4 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		278C5BD429AAA0E10041D4EB /* CouponsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsCollectionViewCell.swift; sourceTree = "<group>"; };
 		278C5BD529AAA0E10041D4EB /* CouponsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponsCollectionViewCell.xib; sourceTree = "<group>"; };
 		278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -86,7 +87,6 @@
 		27C3BB9729AC24B000486455 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		27C3BB9B29AC377900486455 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		27C3BBA929AC891C00486455 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		27C3BBAB29AC892C00486455 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		27C3BBB129AC90A600486455 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdminShopify_AdminShopifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +209,7 @@
 		271DA15429A979E8008EF0B0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				275791C029AD7FE7003F58B4 /* Products.swift */,
 				27C3BB9A29AC376800486455 /* Networking */,
 			);
 			path = Model;
@@ -229,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				27C3BBA929AC891C00486455 /* LoginViewController.swift */,
-				27C3BBAB29AC892C00486455 /* SignUpViewController.swift */,
 				271DA15729A97A89008EF0B0 /* ProductsViewController.swift */,
 				271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */,
 				271DA15929A97A98008EF0B0 /* CouponsViewController.swift */,
@@ -548,9 +548,9 @@
 				271DA15A29A97A98008EF0B0 /* CouponsViewController.swift in Sources */,
 				271DA12029A975F6008EF0B0 /* AppDelegate.swift in Sources */,
 				271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */,
+				275791C129AD7FE7003F58B4 /* Products.swift in Sources */,
 				271DA12229A975F6008EF0B0 /* SceneDelegate.swift in Sources */,
 				271DA15829A97A89008EF0B0 /* ProductsViewController.swift in Sources */,
-				27C3BBAC29AC892C00486455 /* SignUpViewController.swift in Sources */,
 				278C5BD629AAA0E10041D4EB /* CouponsCollectionViewCell.swift in Sources */,
 				27C3BB9C29AC377900486455 /* EndPoint.swift in Sources */,
 				278C5BDF29AABADC0041D4EB /* UIFunctions.swift in Sources */,
