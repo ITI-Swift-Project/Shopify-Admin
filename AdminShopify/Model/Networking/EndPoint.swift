@@ -8,7 +8,7 @@
 import Foundation
 
 enum EndPoint {
-    enum EndPoint {
+    
         case all
         case Men
         case Women
@@ -24,5 +24,5 @@ enum EndPoint {
             case .Sale:  return "products.json?collection_id=437627027760"
             }
         }
-    }
+
 }
