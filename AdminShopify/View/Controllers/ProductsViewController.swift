@@ -23,7 +23,7 @@ class ProductsViewController: UIViewController {
         
         NetworkViewModel = NetworkingViewModel()
         let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
-        print("urlis:\(url)")
+        print("url is:\(url)")
         NetworkViewModel.getAllProducts(url: url)
         NetworkViewModel.bindingProductsResult = { () in
             DispatchQueue.main.async {
@@ -136,9 +136,9 @@ extension ProductsViewController : UICollectionViewDataSource{
         cell.productNameLabel.text = displayArray?[indexPath.row].title
 //        cell.productNameLabel.adjustsFontSizeToFitWidth = true
         cell.productImageView.kf.indicatorType = .activity
-        cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
+        cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
         cell.productVendorLabel.text = displayArray?[indexPath.row].vendor
-        cell.productPriceLabel.text = "\((displayArray?[indexPath.row].variants[0].price) ?? "")$"
+        cell.productPriceLabel.text = "\((displayArray?[indexPath.row].variants?[0].price) ?? "")$"
         cell.productPriceLabel.adjustsFontSizeToFitWidth = true
      
         
@@ -175,7 +175,7 @@ extension ProductsViewController : UISearchBarDelegate {
             displayArray = productsArray?.products
         }
         for product in  (productsArray?.products)! {
-            if product.title.uppercased().contains(searchText.uppercased()){
+            if product.title!.uppercased().contains(searchText.uppercased()){
                 displayArray?.append(product)
             }
         }

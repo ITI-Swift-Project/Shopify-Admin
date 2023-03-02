@@ -23,9 +23,9 @@ class ProductCRUDViewController: UIViewController {
         
         productTitleTextField.text = product?.title ?? ""
         productVendorTextField.text = product?.vendor ?? ""
-        productPriceTextField.text = product?.variants[0].price ?? "0"
-        inventoryTextField.text = String(product?.variants[0].inventory_quantity ?? 0)
-        productImageUrlTextField.text = product?.image.src ?? ""
+        productPriceTextField.text = product?.variants?[0].price ?? "0"
+        inventoryTextField.text = String(product?.variants?[0].inventory_quantity ?? 0)
+        productImageUrlTextField.text = product?.image?.src ?? ""
 
     }
     
