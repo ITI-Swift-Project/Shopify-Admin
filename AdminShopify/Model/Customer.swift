@@ -8,12 +8,12 @@
 import Foundation
 
 struct Customer : Codable{
-   var first_name :  String
-   var last_name : String
-   var orders_count : Int
-   var total_spent : String
-   var currency : String
-   var phone : String
+   var first_name :  String?
+   var last_name : String?
+   var orders_count : Int?
+   var total_spent : String?
+   var currency : String?
+   var phone : String?
 }
 
 class Customers : Codable {
