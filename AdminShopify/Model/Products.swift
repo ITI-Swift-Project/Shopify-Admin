@@ -24,6 +24,7 @@ struct Product : Codable {
     var body_html : String?
     var image : image?
     var variants : [variants]?
+    var product_type: String?
 }
 
 class Products : Codable {

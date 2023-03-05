@@ -21,6 +21,7 @@
 		271DA15C29A97AA8008EF0B0 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */; };
 		271DA15E29A97ACD008EF0B0 /* ProductCRUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */; };
 		271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */; };
+		2736F59329B407B500BB6FBB /* CRUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2736F59229B407B500BB6FBB /* CRUDProtocol.swift */; };
 		275791C129AD7FE7003F58B4 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C029AD7FE7003F58B4 /* Products.swift */; };
 		275791C329ADABCA003F58B4 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C229ADABCA003F58B4 /* Discount.swift */; };
 		275791C529ADDD48003F58B4 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C429ADDD48003F58B4 /* Customer.swift */; };
@@ -80,6 +81,7 @@
 		271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		271DA15D29A97ACD008EF0B0 /* ProductCRUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCRUDViewController.swift; sourceTree = "<group>"; };
 		271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCRUDViewController.swift; sourceTree = "<group>"; };
+		2736F59229B407B500BB6FBB /* CRUDProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDProtocol.swift; sourceTree = "<group>"; };
 		275791C029AD7FE7003F58B4 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		275791C229ADABCA003F58B4 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		275791C429ADDD48003F58B4 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				27C3BB9729AC24B000486455 /* NetworkServices.swift */,
+				2736F59229B407B500BB6FBB /* CRUDProtocol.swift */,
 				27C3BB9B29AC377900486455 /* EndPoint.swift */,
 			);
 			path = Networking;
@@ -559,6 +562,7 @@
 				271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */,
 				275791C129AD7FE7003F58B4 /* Products.swift in Sources */,
 				275791C329ADABCA003F58B4 /* Discount.swift in Sources */,
+				2736F59329B407B500BB6FBB /* CRUDProtocol.swift in Sources */,
 				275791C529ADDD48003F58B4 /* Customer.swift in Sources */,
 				271DA12229A975F6008EF0B0 /* SceneDelegate.swift in Sources */,
 				271DA15829A97A89008EF0B0 /* ProductsViewController.swift in Sources */,

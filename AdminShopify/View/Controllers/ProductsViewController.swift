@@ -10,16 +10,21 @@ import Kingfisher
 
 
 class ProductsViewController: UIViewController {
-
+    
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var productsSearchBar: UISearchBar!
     
+    let refreshControl = UIRefreshControl()
     var NetworkViewModel : NetworkingViewModel!
     var productsArray : Products?
     var displayArray : [Product]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+           refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+           refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+           productsCollectionView.addSubview(refreshControl)
         
         NetworkViewModel = NetworkingViewModel()
         let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
@@ -46,11 +51,15 @@ class ProductsViewController: UIViewController {
         
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+       
+    }
+    
     
     @IBAction func filterSegment(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0 :
-           print("all")
+            print("all")
             let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
             NetworkViewModel.getAllProducts(url: url)
             NetworkViewModel.bindingProductsResult = { () in
@@ -105,7 +114,7 @@ class ProductsViewController: UIViewController {
                 }
             }
         default:
-        break
+            break
         }
     }
     
@@ -119,7 +128,7 @@ class ProductsViewController: UIViewController {
         tabBarController?.tabBar.backgroundColor = UIColor(named: "04395E")
         tabBarController?.tabBar.layer.cornerRadius = UIScreen.main.bounds.width / 20
     }
-
+    
 }
 
 //MARK:  Collection View Protocols
@@ -134,13 +143,13 @@ extension ProductsViewController : UICollectionViewDataSource{
         cell.layer.masksToBounds = true
         
         cell.productNameLabel.text = displayArray?[indexPath.row].title
-//        cell.productNameLabel.adjustsFontSizeToFitWidth = true
+        //        cell.productNameLabel.adjustsFontSizeToFitWidth = true
         cell.productImageView.kf.indicatorType = .activity
         cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
         cell.productVendorLabel.text = displayArray?[indexPath.row].vendor
         cell.productPriceLabel.text = "\((displayArray?[indexPath.row].variants?[0].price) ?? "")$"
         cell.productPriceLabel.adjustsFontSizeToFitWidth = true
-     
+        
         
         return cell
     }
@@ -150,10 +159,28 @@ extension ProductsViewController : UICollectionViewDataSource{
 extension ProductsViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let PVC = storyboard?.instantiateViewController(withIdentifier: "productCRUD") as! ProductCRUDViewController
-       // PVC.actionButtonOutlet.setTitle("Update", for: .normal)
-        PVC.product = displayArray?[indexPath.row]
-        self.present(PVC, animated:true, completion:nil)
+        let alert : UIAlertController = UIAlertController(title: "Update || Delete", message: " Please Select  Which Action You Want To Perform ", preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "Edit", style: .default , handler: { [self]action in
+            let PVC = storyboard?.instantiateViewController(withIdentifier: "productCRUD") as! ProductCRUDViewController
+
+            PVC.product = displayArray?[indexPath.row]
+            self.present(PVC, animated:true, completion:nil)
+        })
+        
+        let delete = UIAlertAction(title: "Delete", style: .default , handler: { [self]action in
+            let url = "\(NetworkServices.base_url)/products/\(displayArray?[indexPath.row].id ?? 0).json"
+            NetworkServices.delete(stringURL: url)
+        })
+        
+        edit.setValue(UIColor.systemYellow , forKey: "titleTextColor")
+        delete.setValue(UIColor.red , forKey: "titleTextColor")
+        let cancle = UIAlertAction(title: "Cancle", style: .cancel, handler: nil)
+        
+        alert.addAction(edit)
+        alert.addAction(delete)
+        alert.addAction(cancle)
+        self.present(alert, animated: true , completion: nil)
+        
     }
     
 }
@@ -162,6 +189,11 @@ extension ProductsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/5)-10)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     
 }
 
