@@ -7,7 +7,7 @@
 
 import UIKit
 import Kingfisher
-import LabelKit
+//import LabelKit
 
 
 class ProductsViewController: UIViewController {
@@ -201,7 +201,15 @@ extension ProductsViewController : UICollectionViewDelegate {
 
 extension ProductsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/5)-10)
+        return CGSize(width: self.view.frame.width - 20, height: self.view.frame.height * 0.18)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0 , left: 10, bottom: 0, right: 10)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(15)
     }
 }
 
