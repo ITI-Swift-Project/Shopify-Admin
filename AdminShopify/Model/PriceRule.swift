@@ -8,12 +8,13 @@
 import Foundation
 
 struct price_rule : Codable{
-    
+  var  id : Int?
   var  value_type : String?  //"percentage",
-  var   value : String? //"-30.0"
+  var  value : String? //"-30.0"
   var  customer_selection : String? //"all"
   var  once_per_customer: Bool?
   var  usage_limit : Int?
+    var title : String?
     
 }
 

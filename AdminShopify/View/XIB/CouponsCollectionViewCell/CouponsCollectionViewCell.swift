@@ -12,7 +12,7 @@ class CouponsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var discountNameLabel: UILabel!
     @IBOutlet weak var discountCodeLabel: UILabel!
     @IBOutlet weak var discountImageView: UIImageView!
-    
+    @IBOutlet weak var discountValueLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

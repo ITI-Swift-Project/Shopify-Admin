@@ -9,6 +9,7 @@ target 'AdminShopify' do
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire'
   pod 'Reachability', '~> 3.2'
+  pod 'LabelKit', '~> 1.0'
 
   target 'AdminShopifyTests' do
     inherit! :search_paths

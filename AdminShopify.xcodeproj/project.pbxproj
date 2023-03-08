@@ -26,6 +26,8 @@
 		275791C329ADABCA003F58B4 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C229ADABCA003F58B4 /* Discount.swift */; };
 		275791C529ADDD48003F58B4 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C429ADDD48003F58B4 /* Customer.swift */; };
 		275791C729ADDD59003F58B4 /* PriceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275791C629ADDD59003F58B4 /* PriceRule.swift */; };
+		277C88AB29B48A9F00388F27 /* CustomerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C88A929B48A9F00388F27 /* CustomerCollectionViewCell.swift */; };
+		277C88AC29B48A9F00388F27 /* CustomerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277C88AA29B48A9F00388F27 /* CustomerCollectionViewCell.xib */; };
 		278C5BD629AAA0E10041D4EB /* CouponsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BD429AAA0E10041D4EB /* CouponsCollectionViewCell.swift */; };
 		278C5BD729AAA0E10041D4EB /* CouponsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278C5BD529AAA0E10041D4EB /* CouponsCollectionViewCell.xib */; };
 		278C5BDB29AAADC50041D4EB /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */; };
@@ -35,7 +37,6 @@
 		27C3BB9829AC24B000486455 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9729AC24B000486455 /* NetworkServices.swift */; };
 		27C3BB9C29AC377900486455 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BB9B29AC377900486455 /* EndPoint.swift */; };
 		27C3BBAA29AC891C00486455 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBA929AC891C00486455 /* LoginViewController.swift */; };
-		27C3BBB029AC8DFF00486455 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */; };
 		27C3BBB229AC90A600486455 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3BBB129AC90A600486455 /* TabBarController.swift */; };
 		6E3691B9A5255BEC719A4C21 /* Pods_AdminShopify_AdminShopifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */; };
 		BEE0D6BB084D3BFB2DAA5143 /* Pods_AdminShopifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1AE2FC625620F29798FBAE /* Pods_AdminShopifyTests.framework */; };
@@ -86,6 +87,8 @@
 		275791C229ADABCA003F58B4 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		275791C429ADDD48003F58B4 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		275791C629ADDD59003F58B4 /* PriceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRule.swift; sourceTree = "<group>"; };
+		277C88A929B48A9F00388F27 /* CustomerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCollectionViewCell.swift; sourceTree = "<group>"; };
+		277C88AA29B48A9F00388F27 /* CustomerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCollectionViewCell.xib; sourceTree = "<group>"; };
 		278C5BD429AAA0E10041D4EB /* CouponsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsCollectionViewCell.swift; sourceTree = "<group>"; };
 		278C5BD529AAA0E10041D4EB /* CouponsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponsCollectionViewCell.xib; sourceTree = "<group>"; };
 		278C5BD929AAADC50041D4EB /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -95,7 +98,6 @@
 		27C3BB9729AC24B000486455 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		27C3BB9B29AC377900486455 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		27C3BBA929AC891C00486455 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		27C3BBB129AC90A600486455 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4FF6B68E5FFC10645B361591 /* Pods_AdminShopify_AdminShopifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdminShopify_AdminShopifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DA7033883DEDB11AB0AE2E5 /* Pods-AdminShopify-AdminShopifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdminShopify-AdminShopifyUITests.release.xcconfig"; path = "Target Support Files/Pods-AdminShopify-AdminShopifyUITests/Pods-AdminShopify-AdminShopifyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -246,7 +248,6 @@
 				271DA15929A97A98008EF0B0 /* CouponsViewController.swift */,
 				271DA15F29A97ADB008EF0B0 /* CouponCRUDViewController.swift */,
 				271DA15B29A97AA8008EF0B0 /* StoreViewController.swift */,
-				27C3BBAF29AC8DFF00486455 /* InformationViewController.swift */,
 				27C3BBB129AC90A600486455 /* TabBarController.swift */,
 			);
 			path = Controllers;
@@ -255,10 +256,20 @@
 		274959D529A9842900A4F8A0 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				277C88A829B48A9600388F27 /* CustomerCollectionViewCell */,
 				278C5BD829AAAD9A0041D4EB /* ProductsCollectionViewCell */,
 				278C5BD329AAA0AA0041D4EB /* CouponsCollectionViewCell */,
 			);
 			path = XIB;
+			sourceTree = "<group>";
+		};
+		277C88A829B48A9600388F27 /* CustomerCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				277C88A929B48A9F00388F27 /* CustomerCollectionViewCell.swift */,
+				277C88AA29B48A9F00388F27 /* CustomerCollectionViewCell.xib */,
+			);
+			path = CustomerCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		278C5BD329AAA0AA0041D4EB /* CouponsCollectionViewCell */ = {
@@ -422,6 +433,7 @@
 				278C5BDC29AAADC50041D4EB /* ProductsCollectionViewCell.xib in Resources */,
 				271DA12F29A975F7008EF0B0 /* LaunchScreen.storyboard in Resources */,
 				278C5BD729AAA0E10041D4EB /* CouponsCollectionViewCell.xib in Resources */,
+				277C88AC29B48A9F00388F27 /* CustomerCollectionViewCell.xib in Resources */,
 				271DA12C29A975F7008EF0B0 /* Assets.xcassets in Resources */,
 				271DA12729A975F6008EF0B0 /* Main.storyboard in Resources */,
 			);
@@ -560,6 +572,7 @@
 				271DA15A29A97A98008EF0B0 /* CouponsViewController.swift in Sources */,
 				271DA12029A975F6008EF0B0 /* AppDelegate.swift in Sources */,
 				271DA16029A97ADB008EF0B0 /* CouponCRUDViewController.swift in Sources */,
+				277C88AB29B48A9F00388F27 /* CustomerCollectionViewCell.swift in Sources */,
 				275791C129AD7FE7003F58B4 /* Products.swift in Sources */,
 				275791C329ADABCA003F58B4 /* Discount.swift in Sources */,
 				2736F59329B407B500BB6FBB /* CRUDProtocol.swift in Sources */,
@@ -572,7 +585,6 @@
 				275791C729ADDD59003F58B4 /* PriceRule.swift in Sources */,
 				278C5BDB29AAADC50041D4EB /* ProductsCollectionViewCell.swift in Sources */,
 				271DA15C29A97AA8008EF0B0 /* StoreViewController.swift in Sources */,
-				27C3BBB029AC8DFF00486455 /* InformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
