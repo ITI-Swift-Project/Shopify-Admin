@@ -13,7 +13,7 @@ struct Customer : Codable{
    var orders_count : Int?
    var total_spent : String?
    var currency : String?
-   var phone : String?
+   var email : String?
 }
 
 class Customers : Codable {

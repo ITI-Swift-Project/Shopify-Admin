@@ -14,7 +14,7 @@ struct Discount : Codable {
   var  usage_count : Int
 }
 
-class Discounts : Codable {
+class Discounts : Codable{
     var discount_codes : [Discount]?
 }
 

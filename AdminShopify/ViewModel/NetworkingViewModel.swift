@@ -47,6 +47,7 @@ class NetworkingViewModel {
             bindingSaleProductsResult()
         }
     }
+  
     
     
     
@@ -81,12 +82,18 @@ class NetworkingViewModel {
         }
     }
     
-    //MARK: - Fetching Coupons
+    //MARK: - Fetching Price Rules & Coupons
     var bindingCouponsResult : (()->()) = {}
+    var bindingPriceRulesResult : (()->()) = {}
 
     var couponsResult : Discounts!{
         didSet{
             bindingCouponsResult()
+        }
+    }
+    var priceRulesResult : Prices_Rules!{
+        didSet{
+            bindingPriceRulesResult()
         }
     }
     
@@ -95,7 +102,27 @@ class NetworkingViewModel {
             self.couponsResult = result
         }
     }
+    func getPriceRules(url : String){
+        NetworkServices.fetch(url: url) { result in
+            self.priceRulesResult = result
+        }
+    }
     
+    
+    //MARK: - Fetching Customers
+    var bindingCustomersResult : (()->()) = {}
+
+    var customersResult : Customers!{
+        didSet{
+            bindingCustomersResult()
+        }
+    }
+    
+    func getCutomers(url : String){
+        NetworkServices.fetch(url: url) { result in
+            self.customersResult = result
+        }
+    }
     
 }
 

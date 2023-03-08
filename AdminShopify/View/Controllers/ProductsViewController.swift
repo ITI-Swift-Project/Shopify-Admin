@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import LabelKit
 
 
 class ProductsViewController: UIViewController {
@@ -14,7 +15,7 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var productsSearchBar: UISearchBar!
     
-    let refreshControl = UIRefreshControl()
+   
     var NetworkViewModel : NetworkingViewModel!
     var productsArray : Products?
     var displayArray : [Product]?
@@ -22,9 +23,7 @@ class ProductsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-           refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-           refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-           productsCollectionView.addSubview(refreshControl)
+       
         
         NetworkViewModel = NetworkingViewModel()
         let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
@@ -48,13 +47,20 @@ class ProductsViewController: UIViewController {
         productsCollectionView.register(ProductsCollectionViewCell.nib(), forCellWithReuseIdentifier: "ProductsCollectionViewCell")
         self.makeCornerRoundForTabBar()
         
-        
     }
-    
-    @objc func refresh(_ sender: AnyObject) {
-       
+    override func viewWillAppear(_ animated: Bool) {
+        NetworkViewModel = NetworkingViewModel()
+        let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
+        print("url is:\(url)")
+        NetworkViewModel.getAllProducts(url: url)
+        NetworkViewModel.bindingProductsResult = { () in
+            DispatchQueue.main.async {
+                self.productsArray = self.NetworkViewModel?.allProductsResult
+                self.displayArray = self.productsArray?.products
+                self.productsCollectionView.reloadData()
+            }
+        }
     }
-    
     
     @IBAction func filterSegment(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -142,8 +148,15 @@ extension ProductsViewController : UICollectionViewDataSource{
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
         
+        
+//        CATransaction.begin()
+//        CATransaction.setAnimationDuration(3.0)
+//        labelLayer.attributedText = attributedText
+//        CATransaction.commit()
+        
+       
+        
         cell.productNameLabel.text = displayArray?[indexPath.row].title
-        //        cell.productNameLabel.adjustsFontSizeToFitWidth = true
         cell.productImageView.kf.indicatorType = .activity
         cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
         cell.productVendorLabel.text = displayArray?[indexPath.row].vendor
@@ -162,7 +175,6 @@ extension ProductsViewController : UICollectionViewDelegate {
         let alert : UIAlertController = UIAlertController(title: "Update || Delete", message: " Please Select  Which Action You Want To Perform ", preferredStyle: .actionSheet)
         let edit = UIAlertAction(title: "Edit", style: .default , handler: { [self]action in
             let PVC = storyboard?.instantiateViewController(withIdentifier: "productCRUD") as! ProductCRUDViewController
-
             PVC.product = displayArray?[indexPath.row]
             self.present(PVC, animated:true, completion:nil)
         })
@@ -170,6 +182,8 @@ extension ProductsViewController : UICollectionViewDelegate {
         let delete = UIAlertAction(title: "Delete", style: .default , handler: { [self]action in
             let url = "\(NetworkServices.base_url)/products/\(displayArray?[indexPath.row].id ?? 0).json"
             NetworkServices.delete(stringURL: url)
+            displayArray?.remove(at: indexPath.row)
+            productsCollectionView.reloadData()
         })
         
         edit.setValue(UIColor.systemYellow , forKey: "titleTextColor")
@@ -189,12 +203,6 @@ extension ProductsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width-10, height: (collectionView.bounds.height/5)-10)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
 }
 
 //MARK: - Product Search Bar

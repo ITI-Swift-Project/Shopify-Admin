@@ -16,6 +16,7 @@ class ProductCRUDViewController: UIViewController {
     @IBOutlet weak var inventoryTextField: UITextField!
     @IBOutlet weak var productImageUrlTextField: UITextField!
     @IBOutlet weak var productTypeTextField: UITextField!
+    @IBOutlet weak var productImageView: UIImageView!
     
     var product : Product?
     var flag : Bool?
@@ -25,27 +26,32 @@ class ProductCRUDViewController: UIViewController {
         
         self.setTextFieldData()
         self.checkFunctionalty()
-
+        
 
     }
     
 
+    @IBAction func checkProductImage(_ sender: UIButton) {
+        productImageView.kf.setImage(with: URL(string:productImageUrlTextField.text  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
+    }
     
     @IBAction func actionButton(_ sender: UIButton) {
         
         if (productTitleTextField.text != nil){
             
-            let parameters : [String:Any] = ["product": ["title": productTitleTextField.text , "vendor": productVendorTextField.text ,"variants" : [["inventory_quantity":Int(inventoryTextField.text ?? "0")  ,"price":productPriceTextField.text]],"product_type":productTypeTextField.text,"images":[["src":productImageUrlTextField.text]]]]
+            let parameters : [String:Any] = ["product": ["title": productTitleTextField.text ?? "", "vendor": productVendorTextField.text ?? "" ,"variants" : [["inventory_quantity":Int(inventoryTextField.text ?? "0") ?? 0 ,"price":productPriceTextField.text ?? "0"]],"product_type":productTypeTextField.text ?? "","images":[["src":productImageUrlTextField.text ?? ""]]]]
             
             print("parameters")
             if (product == nil) {
                 print("Add")
                 let url = "\(NetworkServices.base_url)products.json"
                 NetworkServices.post(parameters: parameters, stringUrl: url)
+                self.dismiss(animated: true)
             }else{
                 print("update")
                 let url = "\(NetworkServices.base_url)products/\(product?.id ?? 1).json"
                 NetworkServices.edit(parameters: parameters, stringUrl: url)
+                self.dismiss(animated: true)
             }
         } else {
             print("Invalid Data!")
@@ -63,16 +69,17 @@ class ProductCRUDViewController: UIViewController {
         inventoryTextField.text = String(product?.variants?[0].inventory_quantity ?? 0)
         productImageUrlTextField.text = product?.image?.src ?? ""
         productTypeTextField.text = product?.product_type ?? ""
+        productImageView.kf.setImage(with: URL(string:product?.image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
     }
     
     func checkFunctionalty() {
-        if (productTitleTextField.text == nil){
-            actionButtonOutlet.imageView?.image = UIImage(systemName: "plus.square.fill.on.square.fill")
-            actionButtonOutlet.setTitle("ADD", for: .normal)
-            actionButtonOutlet.backgroundColor = .green
+        if (productTitleTextField.text == ""){
+            //actionButtonOutlet.imageView?.image = UIImage(systemName: "plus.square.fill.on.square.fill")
+            actionButtonOutlet.setTitle("Add", for: .normal)
+           // actionButtonOutlet.backgroundColor = .green
         } else {
-            actionButtonOutlet.backgroundColor = .systemYellow
-            actionButtonOutlet.setTitle("Update", for: .normal)
+           // actionButtonOutlet.backgroundColor = .systemYellow
+            actionButtonOutlet.setTitle("Edit", for: .normal)
         }
     }
     
