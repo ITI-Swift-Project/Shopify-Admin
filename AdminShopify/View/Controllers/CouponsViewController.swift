@@ -8,135 +8,122 @@
 import UIKit
 
 class CouponsViewController: UIViewController {
+    
 
-    @IBOutlet weak var couponsSearchBar: UISearchBar!
-    @IBOutlet weak var couponsCollectionView: UICollectionView!
+    @IBOutlet weak var couponsSearchBar: UISearchBar! {
+        didSet {
+            couponsSearchBar.delegate = self
+            couponsSearchBar.layer.cornerRadius = 12
+            couponsSearchBar.layer.masksToBounds = true
+        }
+    }
+    @IBOutlet weak var couponsTableView : UITableView! {
+        didSet {
+            couponsTableView.delegate = self
+            couponsTableView.dataSource = self
+            couponsTableView.register(CouponsTableViewCell.nib(), forCellReuseIdentifier: "CouponsTableViewCell")
+        }
+    }
     
-    
-    var displayPriceRule : price_rule?
     var NetworkViewModel : NetworkingViewModel! = NetworkingViewModel()
     var couponsArray : Discounts?
-    var allCouponsArray : [Discount]? = []
-    var allCouponsArrayDisplay : [Discount]? = []
     var displayArray : [Discount]?
-    var priceRuleArray : Prices_Rules?
-    var priceRuleDisplayArray : [price_rule]?
-    var priceRulesIds : [Int] = []
-    
+    var priceRule : price_rule?
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getPriceRulesAndCouponsData()
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        couponsTableView.addGestureRecognizer(longPressRecognizer)
+        couponsTableView.allowsSelection = false
 
-        couponsCollectionView.delegate = self
-        couponsCollectionView.dataSource = self
-        couponsCollectionView.register(CouponsCollectionViewCell.nib(), forCellWithReuseIdentifier: "CouponsCollectionViewCell")
+        couponsTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+      
         
-        couponsSearchBar.delegate = self
-        couponsSearchBar.layer.cornerRadius = 12
-        couponsSearchBar.layer.masksToBounds = true
+        self.getAllCoupons()
+        self.setNavigationItem()
+        self.swipeToDismiss()
     }
     
     
+    
+    
+    //MARK: - Interact with the view methods
+    @objc func refreshData(){
+        getAllCoupons()
+        refreshControl.endRefreshing()
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+            if gestureRecognizer.state == .began {
+                let point = gestureRecognizer.location(in: couponsTableView)
+                if let indexPath = couponsTableView.indexPathForRow(at: point) {
+                    couponsTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    couponsTableView?.delegate?.tableView?(couponsTableView, didSelectRowAt: indexPath)
+                }
+            }
+        }
     @IBAction func addCouponButton(_ sender: UIButton) {
         let CVC = storyboard?.instantiateViewController(withIdentifier: "couponCRUD") as! CouponCRUDViewController
-        CVC.priceRules = priceRuleDisplayArray
+        CVC.priceRuleID = priceRule?.id
         self.present(CVC, animated:true, completion:nil)
     }
     
-    
-    
-    
-    //MARK: - Preoeration Price Rules and Coupons
-    func getPriceRulesAndCouponsData() {
-        let priceRuleUrl = "\(NetworkServices.base_url)\(EndPoint.Price_rules.path)"
-        print("Price Rule url is:\(priceRuleUrl)")
-        self.NetworkViewModel.getPriceRules(url: priceRuleUrl)
-        self.NetworkViewModel.bindingPriceRulesResult = { () in
-            OperationQueue.main.addOperation {
-                self.priceRuleArray = self.NetworkViewModel?.priceRulesResult
-                self.priceRuleDisplayArray = self.priceRuleArray?.price_rules
-                for pr in self.priceRuleDisplayArray ?? []{
-                    self.priceRulesIds.append(pr.id ?? 0)
-                }
-                self.getAllCoupons()
-            }
-        }
+    //MARK: - Set Navigation Bar
+    func setNavigationItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action:#selector(dismissViewController))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "D9D9D9")
+        navigationItem.title = "Coupons off \(priceRule?.value ?? "")%"
+    }
+    func swipeToDismiss() {
+        let swipRight = UISwipeGestureRecognizer(target: self, action: #selector(dismissViewController))
+        swipRight.direction = .right
+        self.view.addGestureRecognizer(swipRight)
     }
     
+    @objc func dismissViewController(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - Preoeration Price Rules and Coupons
     func getAllCoupons(){
-        for id in priceRulesIds {
-            let couponsUrl = "\(NetworkServices.base_url)\(EndPoint.Coupons(id:id).path)"
+        let couponsUrl = "\(NetworkServices.base_url)\(EndPoint.Coupons(id:priceRule?.id ?? 0).path)"
             print("Coupon url is:\(couponsUrl)")
             self.NetworkViewModel.getCoupons(url: couponsUrl)
             self.NetworkViewModel.bindingCouponsResult = { () in
-                OperationQueue.main.addOperation {
+                DispatchQueue.main.async {
                     self.couponsArray = self.NetworkViewModel?.couponsResult
                     self.displayArray = self.couponsArray?.discount_codes
-                    for coupon in self.displayArray ?? [] {
-                        self.allCouponsArray?.append(coupon)
-                        print("from coupons : \(self.allCouponsArray?.count ?? 0) .. \(coupon)")
-                    }
-                    self.allCouponsArrayDisplay = self.allCouponsArray
-                    self.couponsCollectionView.reloadData()
+                    self.couponsTableView.reloadData()
                 }
             }
-        }
-    }
-
+     }
 }
 
+     
+
+//MARK: - Coupons TableView View Protocols
 
 
-//MARK: - Coupons Collection View Protocols
-
-extension CouponsViewController : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allCouponsArrayDisplay?.count ?? 0
-    }
+extension CouponsViewController : UITableViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CouponsCollectionViewCell", for: indexPath) as! CouponsCollectionViewCell
-       
-        let pr_id = allCouponsArrayDisplay?[indexPath.row].price_rule_id
-        for pr in priceRuleArray?.price_rules ?? [] {
-            if pr.id == pr_id {
-            displayPriceRule = pr
-            }
-        }
-        cell.discountNameLabel.text = displayPriceRule?.title
-        cell.discountValueLabel.text = "\(displayPriceRule?.value ?? "")%"
-        cell.discountImageView.image = UIImage(named: "frame1")
-        cell.discountCodeLabel.text = allCouponsArrayDisplay?[indexPath.row].code
-        cell.discountCodeLabel.adjustsFontSizeToFitWidth = true
-        cell.layer.cornerRadius = 17
-        cell.layer.masksToBounds = true
-      
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        return cell
-    }
-    
-    
-}
-
-extension CouponsViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let alert : UIAlertController = UIAlertController(title: "Update || Delete", message: " Please Select  Which Action You Want To Perform ", preferredStyle: .actionSheet)
         let edit = UIAlertAction(title: "Edit", style: .default , handler: { [self]action in
             let CVC = storyboard?.instantiateViewController(withIdentifier: "couponCRUD") as! CouponCRUDViewController
-            CVC.coupon = allCouponsArrayDisplay?[indexPath.row]
-            CVC.priceRules = priceRuleDisplayArray
+            CVC.coupon = displayArray?[indexPath.row]
             self.present(CVC, animated:true, completion:nil)
         })
         
         let delete = UIAlertAction(title: "Delete", style: .default , handler: { [self]action in
-            //price_rules/507328175/discount_codes/507328175.json
-            //price_rules/507328175/discount_codes/507328175.json
-            let url = "\(NetworkServices.base_url)/price_rules/\(allCouponsArrayDisplay?[indexPath.row].price_rule_id ?? 0)/discount_codes/\(allCouponsArrayDisplay?[indexPath.row].id ?? 0).json"
+            let url = "\(NetworkServices.base_url)/price_rules/\(displayArray?[indexPath.row].price_rule_id ?? 0)/discount_codes/\(displayArray?[indexPath.row].id ?? 0).json"
             NetworkServices.delete(stringURL: url)
-            allCouponsArrayDisplay?.remove(at: indexPath.row)
-            couponsCollectionView.reloadData()
+            displayArray?.remove(at: indexPath.row)
+            couponsArray?.discount_codes?.remove(at: indexPath.row)
+            couponsTableView.reloadData()
         })
         
         edit.setValue(UIColor.systemYellow , forKey: "titleTextColor")
@@ -146,40 +133,45 @@ extension CouponsViewController : UICollectionViewDelegate {
         alert.addAction(edit)
         alert.addAction(delete)
         alert.addAction(cancle)
-        self.present(alert, animated: true , completion: nil)
         
+        self.present(alert, animated: true , completion: nil)
+
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(tableView.bounds.height/7)
     }
     
 }
 
-extension CouponsViewController : UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 20, height: self.view.frame.height * 0.18)
-        
+extension CouponsViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return displayArray?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0 , left: 10, bottom: 0, right: 10)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(15)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CouponsTableViewCell", for: indexPath) as! CouponsTableViewCell
+        
+        cell.couponCodeLabel.text = displayArray?[indexPath.row].code ?? ""
+        
+        return cell
     }
 }
+
  
 //MARK: - Coupons Search Bar
 extension CouponsViewController : UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//        displayArray = []
-//
-//        if searchText == "" {
-//            displayArray = couponsArray?.products
-//        }
-//        for product in  (couponsArray?.products)! {
-//            if product.title!.uppercased().contains(searchText.uppercased()){
-//                displayArray?.append(product)
-//            }
-//        }
-//        self.productsCollectionView.reloadData()
-//    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        displayArray = []
+    
+                if searchText == "" {
+                    displayArray = couponsArray?.discount_codes
+                }
+        for coupon in couponsArray?.discount_codes ?? [] {
+            if coupon.code.uppercased().contains(searchText.uppercased()){
+                displayArray?.append(coupon)
+            }
+        }
+        self.couponsTableView.reloadData()
+    }
 }

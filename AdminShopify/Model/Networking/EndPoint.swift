@@ -16,6 +16,7 @@ enum EndPoint {
     case Sale
     case Coupons (id: Int)
     case Price_rules
+    case price_rule (id: Int)
     case Customers
     
     var path: String {
@@ -27,6 +28,7 @@ enum EndPoint {
         case .Sale:  return "products.json?collection_id=437627027760"
         case .Coupons (id: let id): return "price_rules/\(id)/discount_codes.json"
         case .Price_rules:  return "price_rules.json"
+        case .price_rule(id: let id) : return "\(NetworkServices.base_url)price_rules/\(id).json"
         case .Customers: return "customers.json"
         }
     }
