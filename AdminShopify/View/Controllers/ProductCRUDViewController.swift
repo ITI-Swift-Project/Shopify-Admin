@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductCRUDViewController: UIViewController {
 
@@ -17,6 +18,8 @@ class ProductCRUDViewController: UIViewController {
     @IBOutlet weak var productImageUrlTextField: UITextField!
     @IBOutlet weak var productTypeTextField: UITextField!
     @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var productColor: UITextField!
+    @IBOutlet weak var productSizeTextFiled: UITextField!
     
     var product : Product?
     var flag : Bool?
@@ -39,9 +42,25 @@ class ProductCRUDViewController: UIViewController {
         
         if (productTitleTextField.text != nil){
             
-            let parameters : [String:Any] = ["product": ["title": productTitleTextField.text ?? "", "vendor": productVendorTextField.text ?? "" ,"variants" : [["inventory_quantity":Int(inventoryTextField.text ?? "0") ?? 0 ,"price":productPriceTextField.text ?? "0"]],"product_type":productTypeTextField.text ?? "","images":[["src":productImageUrlTextField.text ?? ""]]]]
-            
-            print("parameters")
+            let parameters : [String:Any] = ["product": ["title": productTitleTextField.text ?? "",
+                "vendor": productVendorTextField.text ?? "" ,
+                "variants":[
+                    ["inventory_quantity":Int(inventoryTextField.text ?? "0") ?? 0 ,
+                     "price":productPriceTextField.text ?? "0" ,
+                     "option1": productSizeTextFiled.text!,
+                     "option2": productColor.text!]],
+                     "product_type":productTypeTextField.text ?? "",
+                     "images":[["src":productImageUrlTextField.text ?? ""]],
+                    "options": [
+                    ["name": "Size",
+                    "position": 1,
+                    "values": [productSizeTextFiled.text!],
+                     ],
+                    ["name": "Color",
+                        "position": 2,
+                        "values": [productColor.text!],
+                    ]]]]
+    
             if (product == nil) {
                 print("Add")
                 let url = "\(NetworkServices.base_url)products.json"
@@ -70,30 +89,16 @@ class ProductCRUDViewController: UIViewController {
         productImageUrlTextField.text = product?.image?.src ?? ""
         productTypeTextField.text = product?.product_type ?? ""
         productImageView.kf.setImage(with: URL(string:product?.image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
+        productSizeTextFiled.text = product?.options?[0].values?.first ?? ""
+        productColor.text = product?.options?[1].values?.first ?? ""
     }
     
     func checkFunctionalty() {
         if (productTitleTextField.text == ""){
-            //actionButtonOutlet.imageView?.image = UIImage(systemName: "plus.square.fill.on.square.fill")
             actionButtonOutlet.setTitle("Add", for: .normal)
-           // actionButtonOutlet.backgroundColor = .green
         } else {
-           // actionButtonOutlet.backgroundColor = .systemYellow
             actionButtonOutlet.setTitle("Edit", for: .normal)
         }
     }
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

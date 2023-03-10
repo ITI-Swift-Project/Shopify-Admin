@@ -7,23 +7,43 @@
 
 import UIKit
 import Kingfisher
-//import LabelKit
+
 
 
 class ProductsViewController: UIViewController {
     
-    @IBOutlet weak var productsCollectionView: UICollectionView!
-    @IBOutlet weak var productsSearchBar: UISearchBar!
+    @IBOutlet weak var productsCollectionView: UICollectionView!{
+        didSet{
+            productsCollectionView.delegate = self
+            productsCollectionView.dataSource = self
+            productsCollectionView.register(ProductsCollectionViewCell.nib(), forCellWithReuseIdentifier: "ProductsCollectionViewCell")
+        }
+    }
+    @IBOutlet weak var productsSearchBar: UISearchBar! {
+        didSet{
+            productsSearchBar.delegate = self
+            productsSearchBar.layer.cornerRadius = 12
+            productsSearchBar.layer.masksToBounds = true
+        }
+    }
     
    
     var NetworkViewModel : NetworkingViewModel!
     var productsArray : Products?
     var displayArray : [Product]?
+    let refreshControl = UIRefreshControl()
+    var target : Int?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        productsCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        productsCollectionView.addGestureRecognizer(longPressRecognizer)
+        productsCollectionView.allowsSelection = false
         
         NetworkViewModel = NetworkingViewModel()
         let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
@@ -37,17 +57,54 @@ class ProductsViewController: UIViewController {
             }
         }
         
-        productsSearchBar.delegate = self
+     
         
-        productsSearchBar.layer.cornerRadius = 12
-        productsSearchBar.layer.masksToBounds = true
         
-        productsCollectionView.delegate = self
-        productsCollectionView.dataSource = self
-        productsCollectionView.register(ProductsCollectionViewCell.nib(), forCellWithReuseIdentifier: "ProductsCollectionViewCell")
         self.makeCornerRoundForTabBar()
         
     }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+            if gestureRecognizer.state == .began {
+                let point = gestureRecognizer.location(in: productsCollectionView)
+                if let indexPath = productsCollectionView.indexPathForItem(at: point) {
+                    productsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+                    productsCollectionView?.delegate?.collectionView?(productsCollectionView, didSelectItemAt: indexPath)
+                }
+            }
+        }
+    
+   
+    
+    @objc func refreshData(){
+        var url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
+        switch target {
+        case 0 :
+            url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
+        case 1 :
+             url = "\(NetworkServices.base_url)\(EndPoint.Men.path)"
+        case 2 :
+           url = "\(NetworkServices.base_url)\(EndPoint.Women.path)"
+        case 3 :
+             url = "\(NetworkServices.base_url)\(EndPoint.Kids.path)"
+        case 4 :
+             url = "\(NetworkServices.base_url)\(EndPoint.Sale.path)"
+        default:
+            break
+        }
+        NetworkViewModel = NetworkingViewModel()
+        print("url is:\(url)")
+        NetworkViewModel.getAllProducts(url: url)
+        NetworkViewModel.bindingProductsResult = { () in
+            DispatchQueue.main.async {
+                self.productsArray = self.NetworkViewModel?.allProductsResult
+                self.displayArray = self.productsArray?.products
+                self.productsCollectionView.reloadData()
+            }
+        }
+        refreshControl.endRefreshing()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         NetworkViewModel = NetworkingViewModel()
         let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
@@ -65,6 +122,7 @@ class ProductsViewController: UIViewController {
     @IBAction func filterSegment(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0 :
+            target = 0
             print("all")
             let url = "\(NetworkServices.base_url)\(EndPoint.all.path)"
             NetworkViewModel.getAllProducts(url: url)
@@ -76,6 +134,7 @@ class ProductsViewController: UIViewController {
                 }
             }
         case 1 :
+            target = 1
             print("men")
             let url = "\(NetworkServices.base_url)\(EndPoint.Men.path)"
             NetworkViewModel.getMenProducts(url: url)
@@ -87,6 +146,7 @@ class ProductsViewController: UIViewController {
                 }
             }
         case 2 :
+            target = 2
             print("women")
             let url = "\(NetworkServices.base_url)\(EndPoint.Women.path)"
             NetworkViewModel.getWomenProducts(url: url)
@@ -98,6 +158,7 @@ class ProductsViewController: UIViewController {
                 }
             }
         case 3 :
+            target = 3
             print("kids")
             let url = "\(NetworkServices.base_url)\(EndPoint.Kids.path)"
             NetworkViewModel.getKidsProducts(url: url)
@@ -109,6 +170,7 @@ class ProductsViewController: UIViewController {
                 }
             }
         case 4 :
+            target = 4
             print("sale")
             let url = "\(NetworkServices.base_url)\(EndPoint.Sale.path)"
             NetworkViewModel.getSaleProducts(url: url)
@@ -145,16 +207,9 @@ extension ProductsViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductsCollectionViewCell", for: indexPath) as! ProductsCollectionViewCell
+        
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        
-        
-//        CATransaction.begin()
-//        CATransaction.setAnimationDuration(3.0)
-//        labelLayer.attributedText = attributedText
-//        CATransaction.commit()
-        
-       
         
         cell.productNameLabel.text = displayArray?[indexPath.row].title
         cell.productImageView.kf.indicatorType = .activity
