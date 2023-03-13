@@ -235,10 +235,17 @@ extension ProductsViewController : UICollectionViewDelegate {
         })
         
         let delete = UIAlertAction(title: "Delete", style: .default , handler: { [self]action in
-            let url = "\(NetworkServices.base_url)/products/\(displayArray?[indexPath.row].id ?? 0).json"
-            NetworkServices.delete(stringURL: url)
-            displayArray?.remove(at: indexPath.row)
-            productsCollectionView.reloadData()
+            
+            let alert = UIAlertController(title: "Delete", message: "Are Sure You Want To Delete?" , preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default , handler: { action  in
+                let url = "\(NetworkServices.base_url)/products/\(self.displayArray?[indexPath.row].id ?? 0).json"
+                NetworkServices.delete(stringURL: url)
+                self.displayArray?.remove(at: indexPath.row)
+                self.productsCollectionView.reloadData()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancle", style: UIAlertAction.Style.default ))
+            self.present(alert, animated: true, completion: nil)
+         
         })
         
         edit.setValue(UIColor.systemYellow , forKey: "titleTextColor")
@@ -256,7 +263,7 @@ extension ProductsViewController : UICollectionViewDelegate {
 
 extension ProductsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 20, height: self.view.frame.height * 0.18)
+        return CGSize(width: self.view.frame.width - 40, height: self.view.frame.height * 0.18)
         
     }
     

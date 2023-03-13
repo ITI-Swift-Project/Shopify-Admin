@@ -124,5 +124,32 @@ class NetworkingViewModel {
         }
     }
     
+    //MARK: - Post
+    var bindingPostResponse : (()->()) = {}
+
+    var postResponse :[String:Any]!{
+        didSet{
+            bindingPostResponse()
+        }
+    }
+//    func post (url : String, paremeters : [String : Any] ){
+//        NetworkServices.postMethod(url: url, parameters: paremeters) { response in
+//            self.postResponse = response
+//        }
+//    }
+    
+    var bindingPostResponse2 : (()->()) = {}
+    
+    var postResponse2 :Result<Data, Error>!{
+        didSet{
+            bindingPostResponse2()
+        }
+    }
+    
+    func post (url : String,  paremeters : [String : Any],completionHandler :  @escaping (Result<Data, Error>) -> Void)
+    {
+        NetworkServices.post(url: url, parameters: paremeters, completionHandler: completionHandler)
+    }
+    
 }
 

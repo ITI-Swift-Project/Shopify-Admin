@@ -109,6 +109,21 @@ class CouponsViewController: UIViewController {
 
 extension CouponsViewController : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: "Delete", message: "Are Sure You Want To Delete?" , preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default , handler: { action  in
+                let url = "\(NetworkServices.base_url)/price_rules/\(self.displayArray?[indexPath.row].price_rule_id ?? 0)/discount_codes/\(self.displayArray?[indexPath.row].id ?? 0).json"
+                NetworkServices.delete(stringURL: url)
+                self.displayArray?.remove(at: indexPath.row)
+                self.couponsArray?.discount_codes?.remove(at: indexPath.row)
+                self.couponsTableView.reloadData()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancle", style: UIAlertAction.Style.default ))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let alert : UIAlertController = UIAlertController(title: "Update || Delete", message: " Please Select  Which Action You Want To Perform ", preferredStyle: .actionSheet)

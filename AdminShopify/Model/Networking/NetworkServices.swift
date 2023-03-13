@@ -12,7 +12,7 @@ class NetworkServices {
             .responseDecodable (of: T.self ){ data in
                 guard let data = data.value else {return}
                 compiletionHandler(data)
-        }
+            }
     }
     
 }
@@ -29,7 +29,7 @@ extension NetworkServices : CRUDProtocol {
         request.httpMethod = "POST"
         request.httpShouldHandleCookies = false
         let session = URLSession.shared
-
+        
         do {
             
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters , options: .prettyPrinted)
@@ -61,7 +61,7 @@ extension NetworkServices : CRUDProtocol {
         request.httpMethod = "PUT"
         request.httpShouldHandleCookies = false
         let session = URLSession.shared
-
+        
         do {
             
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters , options: .prettyPrinted)
@@ -92,7 +92,7 @@ extension NetworkServices : CRUDProtocol {
         request.httpMethod = "DELETE"
         request.httpShouldHandleCookies = false
         let session = URLSession.shared
-
+        
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
@@ -104,4 +104,103 @@ extension NetworkServices : CRUDProtocol {
     }
     
 }
- 
+
+extension NetworkServices : CRUDProtocol2 {
+    
+    static func postMethod(url: String, parameters: [String : Any], completionHandler: @escaping ([String : Any]?) -> Void) {
+        guard let url = URL(string: url ) else {return}
+        print(url)
+        var request = URLRequest(url:url)
+        request.httpMethod = "POST"
+        request.httpShouldHandleCookies = false
+        let session = URLSession.shared
+        
+        do {
+            
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters , options: .prettyPrinted)
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print("POST :\(response)")
+                completionHandler(response as? [String:Any])
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    
+    static func post( url :String,parameters: [String : Any], completionHandler :  @escaping (Result<Data, Error>) -> Void)  {
+        guard let url = URL(string: url ) else {return}
+        print(url)
+        var request = URLRequest(url:url)
+        request.httpMethod = "POST"
+        request.httpShouldHandleCookies = false
+        let session = URLSession.shared
+        
+        do {
+            
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters , options: .prettyPrinted)
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json",forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print("POST:\(response)")
+                completionHandler(.success(data))
+            } catch {
+                completionHandler(.failure(error))
+            }
+        }.resume()
+    }
+    
+    
+    static func put( url: String ,parameters: [String : Any], completionHandler :  @escaping (Result<Data, Error>) -> Void) {
+            guard let url = URL(string: url ) else {return}
+            print(url)
+            var request = URLRequest(url:url)
+            request.httpMethod = "PUT"
+            request.httpShouldHandleCookies = false
+            let session = URLSession.shared
+            
+            do {
+                
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters , options: .prettyPrinted)
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            session.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {return}
+                do {
+                    let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    print("POST :\(response)")
+                    completionHandler(.success(data))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            }.resume()
+    }
+    
+}
