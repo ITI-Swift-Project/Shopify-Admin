@@ -12,10 +12,12 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var passwordTextField: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        passwordTextField.delegate = self
+        
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
@@ -30,5 +32,23 @@ class LoginViewController: UIViewController {
         }
     }
 
-
 }
+
+
+extension  LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        passwordTextField.endEditing(true)
+        return true
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if passwordTextField.text != "" {
+            return true
+        } else {
+            passwordTextField.placeholder = "Type something"
+            return false
+        }
+    }
+   
+}
+

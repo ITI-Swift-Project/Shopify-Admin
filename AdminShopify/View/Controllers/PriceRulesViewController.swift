@@ -63,11 +63,16 @@ class PriceRulesViewController: UIViewController {
                 })
                 
                 let delete = UIAlertAction(title: "Delete", style: .default , handler: { [self]action in
-                    let url = EndPoint.price_rule(id: priceRuleDisplayArray?[indexPath.row].id ?? 0).path
-                    NetworkServices.delete(stringURL: url)
-                    priceRuleDisplayArray?.remove(at: indexPath.row)
-                    priceRuleArray?.price_rules?.remove(at: indexPath.row)
-                    priceRulesCollectionView.reloadData()
+                    let alert = UIAlertController(title: "Delete", message: "Are Sure You Want To Delete?" , preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default , handler: { action  in
+                        let url = EndPoint.price_rule(id: self.priceRuleDisplayArray?[indexPath.row].id ?? 0).path
+                        NetworkServices.delete(stringURL: url)
+                        self.priceRuleDisplayArray?.remove(at: indexPath.row)
+                        self.priceRuleArray?.price_rules?.remove(at: indexPath.row)
+                        self.priceRulesCollectionView.reloadData()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancle", style: UIAlertAction.Style.default ))
+                    self.present(alert, animated: true, completion: nil)
                 })
                 
                 edit.setValue(UIColor.systemYellow , forKey: "titleTextColor")
