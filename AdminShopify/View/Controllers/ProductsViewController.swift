@@ -263,7 +263,7 @@ extension ProductsViewController : UICollectionViewDelegate {
 
 extension ProductsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 40, height: self.view.frame.height * 0.18)
+        return CGSize(width: self.view.frame.width - 20, height: self.view.frame.height * 0.18)
         
     }
     
@@ -291,4 +291,9 @@ extension ProductsViewController : UISearchBarDelegate {
         }
         self.productsCollectionView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        productsSearchBar.endEditing(true)
+    }
+    
 }

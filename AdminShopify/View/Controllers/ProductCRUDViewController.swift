@@ -32,6 +32,17 @@ class ProductCRUDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       productTitleTextField.delegate = self
+       productVendorTextField.delegate = self
+       productPriceTextField.delegate = self
+       inventoryTextField.delegate = self
+       productImageUrlTextField.delegate = self
+       productTypeTextField.delegate = self
+       productColor.delegate = self
+       productSizeTextFiled.delegate = self
+       productCategoryTextField.delegate = self
+        
+        
         networkViewModel = NetworkingViewModel()
         self.setTextFieldData()
         self.checkFunctionalty()
@@ -225,4 +236,22 @@ func categorized(productId: Int){
 }
 
 
+}
+
+extension ProductCRUDViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        productTitleTextField.endEditing(true)
+        productVendorTextField.endEditing(true)
+        productPriceTextField.endEditing(true)
+        inventoryTextField.endEditing(true)
+        productImageUrlTextField.endEditing(true)
+        productTypeTextField.endEditing(true)
+        productImageView.endEditing(true)
+        productColor.endEditing(true)
+        productSizeTextFiled.endEditing(true)
+        productCategoryTextField.endEditing(true)
+        return true
+    }
+   
 }

@@ -189,4 +189,8 @@ extension CouponsViewController : UISearchBarDelegate {
         }
         self.couponsTableView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        couponsSearchBar.endEditing(true)
+    }
 }

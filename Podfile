@@ -9,6 +9,7 @@ target 'AdminShopify' do
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire'
   pod 'Reachability', '~> 3.2'
+  pod 'OHHTTPStubs/Swift'
   
 
   target 'AdminShopifyTests' do

@@ -23,6 +23,13 @@ class PriceRulesCRUDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPriceRuleValues()
+        
+        titleTextFiled.delegate = self
+        valueTextField.delegate = self
+        startTextField.delegate = self
+        endTextFeild.delegate = self
+        
+        
     }
     
     func setPriceRuleValues(){
@@ -58,4 +65,14 @@ class PriceRulesCRUDViewController: UIViewController {
     }
     
 
+}
+
+extension PriceRulesCRUDViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleTextFiled.endEditing(true)
+        valueTextField.endEditing(true)
+        startTextField.endEditing(true)
+        endTextFeild.endEditing(true)
+        return true
+    }
 }

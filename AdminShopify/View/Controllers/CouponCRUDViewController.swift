@@ -30,6 +30,9 @@ class CouponCRUDViewController: UIViewController {
         NetworkViewModel = NetworkingViewModel()
         self.setCouponData()
         
+        couponCodeTextField.delegate = self
+       
+        
     }
     
     @IBAction func uploadButton(_ sender: UIButton) {
@@ -61,5 +64,12 @@ class CouponCRUDViewController: UIViewController {
         usageCountLabel.text = "Usage count: \(coupon?.usage_count ?? 0)"
         createdAtLabel.text = "Created at: \(coupon?.created_at ?? "" )"
         updatedAtLabel.text = "Update at:\(coupon?.updated_at ?? "")"
+    }
+}
+
+extension CouponCRUDViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        couponCodeTextField.endEditing(true)
+    return true
     }
 }

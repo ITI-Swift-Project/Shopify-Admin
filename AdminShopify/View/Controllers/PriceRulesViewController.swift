@@ -201,5 +201,9 @@ extension PriceRulesViewController : UISearchBarDelegate {
         }
         self.priceRulesCollectionView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        priceRulesSearchBar.endEditing(true)
+    }
 }
 
