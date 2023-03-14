@@ -13,7 +13,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productVendorLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
-    
+    @IBOutlet weak var productInventoryLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

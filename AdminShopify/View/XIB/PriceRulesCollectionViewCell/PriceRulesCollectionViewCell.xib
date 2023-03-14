@@ -17,16 +17,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="190" height="167"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mv0-KD-oMd">
-                        <rect key="frame" x="39" y="126" width="117" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mv0-KD-oMd">
+                        <rect key="frame" x="0.0" y="125.99999999999999" width="190" height="20.333333333333329"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.85098040100000005" green="0.85098040100000005" blue="0.85098040100000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAj-KL-eFa">
-                        <rect key="frame" x="20" y="26" width="150" height="85"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAj-KL-eFa">
+                        <rect key="frame" x="0.0" y="26" width="190" height="86"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                         <color key="textColor" systemColor="systemOrangeColor"/>
                         <nil key="highlightedColor"/>
@@ -35,6 +33,16 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" red="0.015686274510000001" green="0.22352941179999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="dAj-KL-eFa" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.51497" id="1KE-1r-vpX"/>
+                <constraint firstItem="mv0-KD-oMd" firstAttribute="top" secondItem="dAj-KL-eFa" secondAttribute="bottom" constant="14" id="In2-a5-52V"/>
+                <constraint firstItem="mv0-KD-oMd" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.121756" id="Ori-nq-rRI"/>
+                <constraint firstItem="dAj-KL-eFa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" symbolic="YES" id="QHa-d7-XFm"/>
+                <constraint firstAttribute="trailing" secondItem="dAj-KL-eFa" secondAttribute="trailing" symbolic="YES" id="XGC-mt-8GK"/>
+                <constraint firstItem="mv0-KD-oMd" firstAttribute="trailing" secondItem="dAj-KL-eFa" secondAttribute="trailing" id="YRl-H6-OnM"/>
+                <constraint firstItem="mv0-KD-oMd" firstAttribute="leading" secondItem="dAj-KL-eFa" secondAttribute="leading" id="tYi-Hu-4VL"/>
+                <constraint firstItem="dAj-KL-eFa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="26" id="zn8-jp-U5P"/>
+            </constraints>
             <size key="customSize" width="190" height="167"/>
             <connections>
                 <outlet property="priceRuleTitleLabel" destination="mv0-KD-oMd" id="7nk-n5-6XB"/>

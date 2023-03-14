@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70.00 $" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ob9-Ar-S6A">
-                        <rect key="frame" x="319.66666666666669" y="48" width="62.333333333333314" height="20.333333333333329"/>
+                        <rect key="frame" x="329.66666666666669" y="48" width="62.333333333333314" height="20.333333333333329"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,7 +33,13 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AD-03-White-OS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bWB-eh-Tlx">
                         <rect key="frame" x="147" y="63" width="133" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15u-ul-fiu">
+                        <rect key="frame" x="329.66666666666669" y="76" width="62.333333333333314" height="29"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,8 +51,11 @@
                 <constraint firstItem="KMr-ru-4vp" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.888" id="4PC-GO-RHc"/>
                 <constraint firstItem="ob9-Ar-S6A" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.155833" id="8gq-re-Jl1"/>
                 <constraint firstItem="m9t-81-ZcV" firstAttribute="leading" secondItem="KMr-ru-4vp" secondAttribute="trailing" constant="8.0000000000000142" id="EVS-TQ-jmg"/>
+                <constraint firstItem="15u-ul-fiu" firstAttribute="leading" secondItem="ob9-Ar-S6A" secondAttribute="leading" id="NYK-jN-k7p"/>
+                <constraint firstAttribute="trailing" secondItem="ob9-Ar-S6A" secondAttribute="trailing" constant="8" id="Sdt-7s-AG5"/>
+                <constraint firstItem="15u-ul-fiu" firstAttribute="trailing" secondItem="ob9-Ar-S6A" secondAttribute="trailing" id="T37-P4-lae"/>
                 <constraint firstItem="KMr-ru-4vp" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.265" id="bg7-gV-KFq"/>
-                <constraint firstAttribute="trailing" secondItem="ob9-Ar-S6A" secondAttribute="trailing" constant="18" id="eVV-nw-61R"/>
+                <constraint firstItem="15u-ul-fiu" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.232" id="dtr-jM-SEK"/>
                 <constraint firstItem="bWB-eh-Tlx" firstAttribute="leading" secondItem="KMr-ru-4vp" secondAttribute="trailing" constant="38" id="fXE-Ar-BJn"/>
                 <constraint firstItem="ob9-Ar-S6A" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.162667" id="gUg-x4-Gam"/>
                 <constraint firstItem="KMr-ru-4vp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="hNr-St-XZh"/>
@@ -55,12 +64,14 @@
                 <constraint firstItem="m9t-81-ZcV" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.173333" id="mB8-l7-IaZ"/>
                 <constraint firstItem="m9t-81-ZcV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="33" id="pUF-aw-jC6"/>
                 <constraint firstItem="ob9-Ar-S6A" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="48" id="r9h-Ov-bh4"/>
+                <constraint firstItem="15u-ul-fiu" firstAttribute="top" secondItem="ob9-Ar-S6A" secondAttribute="bottom" constant="7.6666666666666714" id="rzG-Wd-9Rg"/>
                 <constraint firstItem="KMr-ru-4vp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="vkz-2a-PvQ"/>
                 <constraint firstItem="bWB-eh-Tlx" firstAttribute="top" secondItem="m9t-81-ZcV" secondAttribute="bottom" constant="8.3333333333333286" id="ycq-U7-MZT"/>
                 <constraint firstItem="m9t-81-ZcV" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.478333" id="ygB-BZ-a4b"/>
             </constraints>
             <connections>
                 <outlet property="productImageView" destination="KMr-ru-4vp" id="E9i-oK-npD"/>
+                <outlet property="productInventoryLabel" destination="15u-ul-fiu" id="cwm-RO-YEA"/>
                 <outlet property="productNameLabel" destination="m9t-81-ZcV" id="mpI-LC-o3T"/>
                 <outlet property="productPriceLabel" destination="ob9-Ar-S6A" id="FsF-3w-sob"/>
                 <outlet property="productVendorLabel" destination="bWB-eh-Tlx" id="C7W-0V-xcq"/>
