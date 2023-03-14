@@ -73,11 +73,11 @@ class ProductCRUDViewController: UIViewController {
                     case .success(let data):
                         do {
                             if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-                                if let errors = dict["errors"] as? [String: [String]] {
+                                if let errors = dict["errors"] as? [String: String] {
                                     var message = ""
                                     for (key, value) in errors {
                                         
-                                        if let errorMessage = value[0] as? String {
+                                        if let errorMessage = value as? String {
                                             message.append("\(key) : ")
                                             message.append("\(errorMessage)")
                                             message.append("\n")
@@ -95,16 +95,18 @@ class ProductCRUDViewController: UIViewController {
                                     
                                 } else if let pro : [String : Any] = dict["product"] as? [String : Any] {
                                     DispatchQueue.main.async {
-                                        
-                                        self.productId = pro["id"] as? Int ?? 0
-                                        self.categorized(productId: self.productId ?? 0)
-                                        NetworkServices.post(parameters: self.categoryParameters ?? [:], stringUrl: "\(NetworkServices.base_url)collects.json")
-                                        let alert = UIAlertController(title: "Success", message: "Product Add Successfully", preferredStyle: UIAlertController.Style.alert)
-                                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                                            self.dismiss(animated: true)
-                                        }))
-                                        self.present(alert, animated: true, completion: nil)
-                                        
+                                        if self.productCategoryTextField.text != ""
+                                        {
+                                            
+                                            self.productId = pro["id"] as? Int ?? 0
+                                            self.categorized(productId: self.productId ?? 0)
+                                            NetworkServices.post(parameters: self.categoryParameters ?? [:], stringUrl: "\(NetworkServices.base_url)collects.json")
+                                            let alert = UIAlertController(title: "Success", message: "Product Add Successfully", preferredStyle: UIAlertController.Style.alert)
+                                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+                                                self.dismiss(animated: true)
+                                            }))
+                                            self.present(alert, animated: true, completion: nil)
+                                        }
                                     }
                             } else {
                                 print("Unknown response")
@@ -168,7 +170,7 @@ func checkFunctionalty() {
 //MARK: - Add To Category
 func categorized(productId: Int){
     let arr = ["Men","Women","Kids","Sale"]
-    if self.productCategoryTextField.text != "" && arr.contains(productCategoryTextField.text ?? "") {
+    if  arr.contains(productCategoryTextField.text ?? "") {
         switch self.productCategoryTextField.text {
         case "Men":
             self.categoryParameters = [

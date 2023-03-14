@@ -17,15 +17,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ASDFGHJHGFD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4O-eH-5G3">
-                        <rect key="frame" x="0.0" y="38" width="320" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASDFGHJHGFD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4O-eH-5G3">
+                        <rect key="frame" x="0.0" y="38" width="320" height="28.666666666666671"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <color key="textColor" systemColor="systemOrangeColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.015686274510000001" green="0.22352941179999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="u4O-eH-5G3" secondAttribute="trailing" id="6VN-s9-FGN"/>
+                    <constraint firstItem="u4O-eH-5G3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="38" id="EXC-2f-xXL"/>
+                    <constraint firstItem="u4O-eH-5G3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="N3a-lg-kXl"/>
+                    <constraint firstItem="u4O-eH-5G3" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.265432" id="UOa-ma-x01"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

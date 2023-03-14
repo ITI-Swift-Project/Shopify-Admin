@@ -213,7 +213,7 @@ extension ProductsViewController : UICollectionViewDataSource{
         
         cell.productNameLabel.text = displayArray?[indexPath.row].title
         cell.productImageView.kf.indicatorType = .activity
-        cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
+        cell.productInventoryLabel.text = String(displayArray?[indexPath.row].variants?[0].inventory_quantity ?? 0);        cell.productImageView.kf.setImage(with: URL(string:displayArray?[indexPath.row].image?.src  ?? "" ),placeholder: UIImage(systemName:"exclamationmark.circle.fill"))
         cell.productVendorLabel.text = displayArray?[indexPath.row].vendor
         cell.productPriceLabel.text = "\((displayArray?[indexPath.row].variants?[0].price) ?? "")$"
         cell.productPriceLabel.adjustsFontSizeToFitWidth = true
